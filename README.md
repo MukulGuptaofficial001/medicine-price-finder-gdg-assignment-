@@ -2,6 +2,12 @@
 
 A full-stack ML app that predicts the fair price of an Indian medicine and finds cheaper generic alternatives with the same composition.
 
+## Live Demo
+
+Check out the deployed application here \|/
+
+url -" https://medicine-price-finder-gdg-assignment-git-huvytxtkawzqfdav4dzy3.streamlit.app/ "
+
 ## Model Accuracy
 
 After training on a ~5000-row sample of the Indian Pharmaceutical Products dataset, the **Random Forest Regressor** achieved:
@@ -81,20 +87,22 @@ Opens at: http://localhost:8501
 
 ## API Endpoints
 
-| Endpoint | Description |
-|---|---|
-| `GET /predict-price?medicine_name=Dolo` | Returns predicted fair price |
-| `GET /alternatives?medicine_name=Dolo` | Returns top 5 cheaper alternatives with same composition |
-| `GET /` | Health check |
+| Endpoint                                | Description                                              |
+| --------------------------------------- | -------------------------------------------------------- |
+| `GET /predict-price?medicine_name=Dolo` | Returns predicted fair price                             |
+| `GET /alternatives?medicine_name=Dolo`  | Returns top 5 cheaper alternatives with same composition |
+| `GET /`                                 | Health check                                             |
 
 ## Composition Cleaning Approach
 
 The composition column in the dataset is extremely inconsistent:
-- `"Paracetamol (500mg)"` 
-- `"PARACETAMOL-500"` 
+
+- `"Paracetamol (500mg)"`
+- `"PARACETAMOL-500"`
 - `"paracetamol 500 mg"`
 
 The cleaning pipeline in `clean.py`:
+
 1. Lowercases everything
 2. Uses regex `(\d+)\s*(mg|ml|mcg|iu|g)` → `\1\2` to normalize dosage spacing (e.g. `500 mg` → `500mg`)
 3. Strips all non-alphanumeric characters (parentheses, hyphens, etc.)
